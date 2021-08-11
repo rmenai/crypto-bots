@@ -8,7 +8,7 @@ except ModuleNotFoundError:
 import logging.handlers
 import os
 
-from python_structure.config import Logs, Settings
+from bots.config import Logs, Settings
 
 # Configure the "TRACE" logging level (e.g. "log.trace(message)")
 logging.TRACE = 5

@@ -19,7 +19,7 @@ RUN poetry install --no-dev --no-interaction
 COPY . .
 
 # Start the bot
-CMD ["python", "-m", "python_structure"]
+CMD ["python", "-m", "bots"]
 
 # Define docker persistent volumes
 VOLUME /app/python_structure/logs
