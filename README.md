@@ -1,22 +1,22 @@
 <br />
 <p align="center">
   <a href="https://github.com/rmenai/python-structure">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/2048px-Python-logo-notext.svg.png" alt="Logo" width="80" height="80">
+    <img src="https://icons.iconarchive.com/icons/cjdowner/cryptocurrency-flat/1024/Bitcoin-BTC-icon.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Python Structure</h3>
+<h3 align="center">Crypto Bots</h3>
 
   <p align="center">
-    The most complete python projects structure
+    Sidebar crypto discord bots
     <br />
-    <a href="https://github.com/rmenai/python-structure"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/rmenai/crypto-bots/blob/main/README.md"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/rmenai/python-structure">View Demo</a>
+    <a href="https://github.com/rmenai/crypto-bots">View Demo</a>
     ·
-    <a href="https://github.com/rmenai/python-structure/issues">Report Bug</a>
+    <a href="https://github.com/rmenai/crypto-bots/issues/new?assignees=&labels=&template=bug_report.md&title=">Report Bug</a>
     ·
-    <a href="https://github.com/rmenai/python-structure/issues">Request Feature</a>
+    <a href="https://github.com/rmenai/crypto-bots/issues/new?assignees=&labels=&template=feature_request.md&title=">Request Feature</a>
   </p>
 </p>
 
@@ -26,15 +26,6 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#project-structure">Project structure</a></li>
-      </ul>
-        <ul>
-        <li><a href="#integrated-tools">Integrated tools</a></li>
-      </ul>
-        <ul>
-        <li><a href="#special-features">Special features</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -43,6 +34,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
+    <li><a href="#environment-variables">Environment Variables</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -56,54 +48,62 @@
 
 ## About The Project
 
-This is my main projects structure. It is pretty much complete, containing all the tools you need for a professional
-project.
+Discord crypto bots showing the price, volume and the ethereum gas price.
 
-### Project structure
-
-<img src="https://i.imgur.com/TJDs5Hv.png" height="400">
-
-### Integrated tools
-
-* [Poetry](https://python-poetry.org/) for dependency management.
-* [Docker](https://www.docker.com/) for container packaging.
-* [pre-commit](https://pre-commit.com/) and [flake8](https://flake8.pycqa.org/en/latest/) for git hooks and linting.
-
-### Special features
-
-* Easily manage your environment variables using [.env](https://pypi.org/project/python-dotenv/).
-* [Colourful](https://pypi.org/project/colorlog/) console logging and rotating log files.
-* Powerful unittests using [pytest](https://docs.pytest.org/en/6.2.x/).
-* Secure your commits with
-  a [Lint & Test](https://github.com/rmenai/python-structure/blob/main/.github/workflows/lint-test.yaml) github action.
-* Orginased contributions with issues and pull requests templates.
+<img src="https://i.imgur.com/qgF1VYQ.png" height="200">
 
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
 ### Prerequisites
+You can easily run the project using Docker. The requirements are:
+* [Docker CE](https://docs.docker.com/engine/install/)
+* [Docker Compose](https://docs.docker.com/compose/)
 
+Or you can install it manually
+
+* [Python](https://www.python.org/downloads/)
 * [Poetry](https://python-poetry.org/docs/)
-* [Docker](https://docs.docker.com/get-docker/) (optional)
 
 ### Installation
-
 1. Clone the repo
    ```shell
-   git clone https://github.com/rmenai/python-structure.git
+   git clone https://github.com/rmenai/crypto-bots.git
    ```
-2. Install the dependencies
+2. Install the dependencies (If you don't choose Docker)
    ```shell
    poetry install
    ```
-3. Install the project git hooks
-   ```shell
-   poetry run task precommit
-   ```
-4. Now change the files and options according to your project
 
 <!-- USAGE EXAMPLES -->
+
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file or in docker-compose.yml
+
+
+| Tokens              | Description                         |
+|---------------------|-------------------------------------|
+| PRICE_BOT_TOKEN     | The price discord bot token         |
+| VOLUME_BOT_TOKEN    | The volume discord bot token        |
+| GAS_BOT_TOKEN       | The gas discord bot token           |
+| NOMICS_TOKEN        | Your token of the nomics API        |
+| ETHGASSTATION_TOKEN | Your token of the ethgasstation API |
+
+* `NOMICS_TOKEN` is required.
+* `ETHGASSTATION_TOKEN` is only required with `GAS_BOT_TOKEN`.
+
+
+| Settings       | Description                      |
+|----------------|----------------------------------|
+| NOMICS_COIN_ID | The nomics id of the coin        |
+| DELAY          | The delay between status refresh |
+| DEBUG          | The volume discord bot token     |
+
+* `NOMICS_COIN_ID` is required.
+* `DELAY` defaults to 5 seconds.
 
 ## Usage
 
@@ -111,6 +111,11 @@ Now you are done! You can start your project and run it using
 
 ```shell
 poetry run task start
+```
+
+or if you choose Docker
+```shell
+docker-compose up
 ```
 
 ## Contributing
