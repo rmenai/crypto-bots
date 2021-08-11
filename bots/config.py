@@ -5,14 +5,15 @@ from pathlib import Path
 
 class Settings:
     id = environ.get("NOMICS_COIN_ID")
-    reload_delay = environ.get("DELAY", 5)
 
+    reload_delay = environ.get("DELAY", 5)
     debug = environ.get("DEBUG", "").lower() == "true"
 
 
 class Tokens:
     nomics = environ.get("NOMICS_TOKEN")
     ethgasstation = environ.get("ETHGASSTATION_TOKEN")
+
     bots = {
         "price": environ.get("PRICE_BOT_TOKEN"),
         "volume": environ.get("VOLUME_BOT_TOKEN"),

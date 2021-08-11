@@ -1,8 +1,21 @@
+import logging
+import sys
+
 from bots.config import Settings, Tokens
 from ethereum_gasprice import GaspriceController
 from ethereum_gasprice.consts import EthereumUnit
 from ethereum_gasprice.providers import EthGasStationProvider
 from nomics import Nomics
+
+log = logging.getLogger(__name__)
+
+if not Tokens.nomics:
+    log.info("You need to provide NOMICS_TOKEN")
+    sys.exit()
+
+if Tokens.bots["gas"] and not Tokens.ethgasstation:
+    log.info("You need to provide ETHGASSTATION_TOKEN")
+    sys.exit()
 
 nomics = Nomics(Tokens.nomics)
 etherescan = GaspriceController(
@@ -72,12 +85,13 @@ class Coin:
         r = nomics.Currencies.get_currencies(ids=Settings.id)[0]
         self._update(**r)
 
-        r = etherescan.get_gasprices()
-        for key, value in r.items():
-            if value is None:
-                continue
-            else:
-                self.gas[key] = value
+        if Tokens.bots["gas"]:
+            r = etherescan.get_gasprices()
+            for key, value in r.items():
+                if value is None:
+                    continue
+                else:
+                    self.gas[key] = value
 
 
 coin = Coin()

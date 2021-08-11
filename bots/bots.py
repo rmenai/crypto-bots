@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import re
+import sys
 from typing import Any, Dict
 
 from bots.config import Settings
@@ -10,6 +11,10 @@ from discord.errors import LoginFailure
 from discord.ext import commands
 
 log = logging.getLogger(__name__)
+
+if not Settings.id:
+    log.info("You need to provide NOMICS_COIN_ID")
+    sys.exit()
 
 
 def exception_handler(loop: Any, context: Dict[str, Any]) -> None:
@@ -66,7 +71,7 @@ class Bots:
 
         # Handle exceptions
         if self.running:
-            log.info(f"Client starting with {', '.join(self.running)}")
+            log.info(f"Client starting for {Settings.id} with {', '.join(self.running)}")
             log.info(f"Updating bots status every {Settings.reload_delay} seconds.")
             loop.set_exception_handler(exception_handler)
             loop.run_forever()
