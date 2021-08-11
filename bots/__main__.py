@@ -1,4 +1,4 @@
-import logging
+from bots.bots import client
+from bots.config import Tokens
 
-log = logging.getLogger(__name__)
-log.info("Project successful")
+client.run(Tokens.bots)
