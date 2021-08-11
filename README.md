@@ -121,7 +121,8 @@ See [CONTRIBUTING.md](https://github.com/rmenai/python-structure/blob/main/CONTR
 
 ## License
 
-Distributed under the MIT License. See [LICENSE](https://github.com/rmenai/python-structure/blob/main/LICENSE) for more information.
+Distributed under the MIT License. See [LICENSE](https://github.com/rmenai/python-structure/blob/main/LICENSE) for more
+information.
 
 
 

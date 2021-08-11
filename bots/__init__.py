@@ -59,7 +59,8 @@ if root.handlers:
 
 # Silence irrelevant loggers
 logging.getLogger("discord").setLevel(logging.ERROR)
-logging.getLogger("discord_slash").setLevel(logging.ERROR)
+logging.getLogger("urllib3").setLevel(logging.ERROR)
+logging.getLogger("httpx").setLevel(logging.ERROR)
 logging.getLogger("asyncio").setLevel(logging.ERROR)
 
 # Setup new logging configuration
