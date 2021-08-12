@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  python-structure:
+  crypto-bots:
     container_name: app
     image: crypto-bots
     build: .
