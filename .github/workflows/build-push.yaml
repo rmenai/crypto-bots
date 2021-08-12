@@ -1,4 +1,4 @@
-name: Build
+name: Build & Push
 
 on:
   workflow_run:
@@ -22,7 +22,6 @@ jobs:
         run: |
           tag=$(cut -c 1-7 <<< $GITHUB_SHA)
           echo "::set-output name=tag::$tag"
-
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -60,5 +59,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Authenticate to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ""
+          heroku_email: "rami.menai@outlook.com"
+          justlogin: true
+
       - name: Release to Heroku
-        run: heroku container:release worker
+        run: |
+          heroku container:login
+          heroku container:release worker -a mm-sidebots
