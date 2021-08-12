@@ -91,6 +91,7 @@ client = Bots(
     {
         "price": Bot(),
         "volume": Bot(),
+        "cap": Bot(),
         "gas": Bot()
     }
 )
