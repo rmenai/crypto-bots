@@ -6,7 +6,7 @@ from pathlib import Path
 class Settings:
     id = environ.get("NOMICS_COIN_ID")
 
-    reload_delay = environ.get("DELAY", 5)
+    reload_delay = int(environ.get("DELAY", 5))
     debug = environ.get("DEBUG", "").lower() == "true"
 
 
