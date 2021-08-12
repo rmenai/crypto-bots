@@ -82,8 +82,12 @@ class Coin:
 
     def reload(self) -> None:
         """Fetch new coin data."""
-        r = nomics.Currencies.get_currencies(ids=Settings.id)[0]
-        self._update(**r)
+        r = nomics.Currencies.get_currencies(ids=Settings.id)
+        if not r:
+            log.error("NOMICS_COIN_ID is invalid.")
+            sys.exit()
+
+        self._update(**r[0])
 
         if Tokens.bots["gas"]:
             r = etherescan.get_gasprices()
