@@ -2,11 +2,10 @@ import asyncio
 import logging
 import re
 import sys
-from typing import Any, Dict
+from typing import Any, Callable, Dict
 
 from bots.config import Settings
 from bots.utils.api import coin
-from bots.utils.coin import repeat
 from discord.errors import LoginFailure
 from discord.ext import commands
 
@@ -17,12 +16,21 @@ if not Settings.id:
     sys.exit()
 
 
+async def repeat(func: Callable, delay: int) -> None:
+    """Repeat a function forever with a delay of seconds."""
+    while True:
+        await asyncio.sleep(delay)
+        func()
+
+
 def exception_handler(loop: Any, context: Dict[str, Any]) -> None:
     """Handle asyncio tasks exceptions."""
     if isinstance(context["exception"], LoginFailure):
         log.error("There is an invalid token")
         loop = asyncio.get_event_loop()
         loop.stop()
+    else:
+        raise context["exception"]
 
 
 class Bot(commands.Bot):
