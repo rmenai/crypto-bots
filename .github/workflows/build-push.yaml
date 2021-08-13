@@ -49,6 +49,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          cache-from: type=registry,ref=ghcr.io/rmenai/crypto-bots:latest
+          cache-to: type=inline
           tags: |
             ghcr.io/rmenai/crypto-bots:latest
             ghcr.io/rmenai/crypto-bots:${{ steps.sha_tag.outputs.tag }}
