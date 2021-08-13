@@ -48,7 +48,10 @@
 
 ## About The Project
 
-Discord crypto bots showing the price, volume and the ethereum gas price.
+Discord crypto bots showing:
+* The price, the volume and the market cap of a coin.
+* The number of holders of a coin (only for ERC20 tokens).
+* The ethereum gas price.
 
 <img src="https://i.imgur.com/qgF1VYQ.png" height="200">
 
@@ -89,25 +92,37 @@ Or manually:
 To run this project, you will need to add the following environment variables to your .env file or in docker-compose.yml
 
 
-| Tokens              | Description                         |
-|---------------------|-------------------------------------|
-| PRICE_BOT_TOKEN     | The price discord bot token         |
-| VOLUME_BOT_TOKEN    | The volume discord bot token        |
-| GAS_BOT_TOKEN       | The gas discord bot token           |
-| NOMICS_TOKEN        | Your token of the [nomics API](https://nomics.com/)        |
-| ETHGASSTATION_TOKEN | Your token of the [ethgasstation API](https://ethgasstation.info/) |
+| Discord bots        | Description                          |
+|---------------------|--------------------------------------|
+| PRICE_BOT_TOKEN     | The **price** discord bot token      |
+| VOLUME_BOT_TOKEN    | The **volume** discord bot token     |
+| CAP_BOT_TOKEN       | The **market cap** discord bot token |
+| HOLDERS_BOT_TOKEN   | The **holders** discord bot token    |
+| GAS_BOT_TOKEN       | The **eth gas** discord bot token    |
 
-* `NOMICS_TOKEN` is required.
-* `ETHGASSTATION_TOKEN` is only required with `GAS_BOT_TOKEN`.
+* These are not all required, you just need at least one or more.
+
+
+| APIs           | Description                                                            |
+|----------------|------------------------------------------------------------------------|
+| NOMICS_API_KEY   | Your token of the [nomics API](https://nomics.com/)                    |
+| ETH_GAS_API_KEY  | Your token of the [ethgasstation API](https://ethgasstation.info/)     |
+| COVALENT_API_KEY | Your token of the [covalent API](https://www.covalenthq.com/docs/api/) |
+
+* `NOMICS_API_KEY` is required.
+* `ETH_GAS_API_KEY` is only required for the eth gas bot.
+* `COVALENT_API_KEY` is only required for the holders bot.
 
 
 | Settings       | Description                      |
 |----------------|----------------------------------|
 | NOMICS_COIN_ID | The nomics id of the coin        |
+| COIN_ADDRESS    | The contract address of the coin  |
 | DELAY          | The delay between status refresh |
 | DEBUG          | The volume discord bot token     |
 
 * `NOMICS_COIN_ID` is required.
+* `COIN_ADDRESS` is required for the holders bot.
 * `DELAY` defaults to 5 seconds.
 
 ## Usage
