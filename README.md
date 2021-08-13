@@ -59,7 +59,6 @@ Discord crypto bots showing the price, volume and the ethereum gas price.
 ### Prerequisites
 You can easily run the project using Docker. The requirements are:
 * [Docker CE](https://docs.docker.com/engine/install/)
-* [Docker Compose](https://docs.docker.com/compose/)
 
 Or you can install it manually
 
@@ -67,11 +66,17 @@ Or you can install it manually
 * [Poetry](https://python-poetry.org/docs/)
 
 ### Installation
+With Docker:
+1. Pull the image
+   ```shell
+   docker pull ghcr.io/rmenai/crypto-bots:latest
+   ```
+Or manually:
 1. Clone the repo
    ```shell
    git clone https://github.com/rmenai/crypto-bots.git
    ```
-2. Install the dependencies (If you don't choose Docker)
+2. Install the dependencies
    ```shell
    poetry install
    ```
@@ -115,7 +120,7 @@ poetry run task start
 
 or if you choose Docker
 ```shell
-docker-compose up
+docker run ghcr.io/rmenai/crypto-bots:latest
 ```
 
 ## Contributing
@@ -128,7 +133,6 @@ See [CONTRIBUTING.md](https://github.com/rmenai/python-structure/blob/main/CONTR
 
 Distributed under the MIT License. See [LICENSE](https://github.com/rmenai/python-structure/blob/main/LICENSE) for more
 information.
-
 
 
 <!-- CONTACT -->
