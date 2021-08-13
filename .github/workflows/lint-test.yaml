@@ -1,6 +1,17 @@
 name: Lint & Test
 
-on: [ push, pull_request ]
+on:
+  push:
+    paths:
+      - 'bots/**'
+      - 'pyproject.toml'
+      - 'poetry.lock'
+      - 'Dockerfile'
+      - '.dockerignore'
+      - '.pre-commit-config.yaml'
+      - 'tox.ini'
+
+  pull_request:
 
 jobs:
   lint-test:
