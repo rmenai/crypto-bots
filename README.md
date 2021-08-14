@@ -96,7 +96,6 @@ To run this project, you will need to add the following environment variables to
 | PRICE_BOT_TOKEN     | The **price** discord bot token      |
 | VOLUME_BOT_TOKEN    | The **volume** discord bot token     |
 | CAP_BOT_TOKEN       | The **market cap** discord bot token |
-| HOLDERS_BOT_TOKEN   | The **holders** discord bot token    |
 | GAS_BOT_TOKEN       | The **eth gas** discord bot token    |
 
 * These are not all required, you just need at least one or more.
@@ -104,11 +103,9 @@ To run this project, you will need to add the following environment variables to
 
 | APIs           | Description                                                            |
 |----------------|------------------------------------------------------------------------|
-| NOMICS_API_KEY   | Your token of the [nomics API](https://nomics.com/)                    |
-| ETH_GAS_API_KEY  | Your token of the [ethgasstation API](https://ethgasstation.info/)     |
+| NOMICS_API_KEY   | Your token of the [nomics API](https://nomics.com/)                  |
 
 * `NOMICS_API_KEY` is required.
-* `ETH_GAS_API_KEY` is only required for the eth gas bot.
 
 
 | Settings       | Description                      |
