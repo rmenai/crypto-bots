@@ -11,8 +11,7 @@ class Settings:
 
 
 class Tokens:
-    nomics = environ.get("NOMICS_TOKEN")
-    ethgasstation = environ.get("ETHGASSTATION_TOKEN")
+    nomics = environ.get("NOMICS_API_KEY")
 
     bots = {
         "price": environ.get("PRICE_BOT_TOKEN"),
@@ -20,6 +19,7 @@ class Tokens:
         "cap": environ.get("CAP_BOT_TOKEN"),
         "gas": environ.get("GAS_BOT_TOKEN")
     }
+    bots = {key: value for key, value in bots.items() if value}
 
 
 class Logs:

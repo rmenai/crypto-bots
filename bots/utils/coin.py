@@ -9,7 +9,12 @@ def format_large(num: int) -> str:
     k = 1000.0
     magnitude = int(floor(log(num, k)))
 
-    return f"{num / k ** magnitude:.2f}{units[magnitude]}"
+    n = num / k ** magnitude
+    if f"{n:.2f}" == "1000.00":
+        n = 1
+        magnitude = magnitude + 1
+
+    return f"{n:.2f}{units[magnitude]}"
 
 
 def get_arrow(pct: float) -> str:

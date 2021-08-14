@@ -1,36 +1,15 @@
 import asyncio
 import logging
 import re
-import sys
-from typing import Any, Callable, Dict
+from typing import Dict
 
 from bots.config import Settings
-from bots.utils.api import coin
+from bots.services.stats import coin
+from bots.utils.loops import repeat
 from discord.errors import LoginFailure
 from discord.ext import commands
 
 log = logging.getLogger(__name__)
-
-if not Settings.id:
-    log.info("You need to provide NOMICS_COIN_ID")
-    sys.exit()
-
-
-async def repeat(func: Callable, delay: int) -> None:
-    """Repeat a function forever with a delay of seconds."""
-    while True:
-        await asyncio.sleep(delay)
-        func()
-
-
-def exception_handler(loop: Any, context: Dict[str, Any]) -> None:
-    """Handle asyncio tasks exceptions."""
-    if isinstance(context["exception"], LoginFailure):
-        log.error("There is an invalid token")
-        loop = asyncio.get_event_loop()
-        loop.stop()
-    else:
-        raise context["exception"]
 
 
 class Bot(commands.Bot):
@@ -38,7 +17,16 @@ class Bot(commands.Bot):
 
     def __init__(self):
         # Initiate a bot without a command prefix
+        self.name = ""
         super(Bot, self).__init__(None)
+
+    async def start(self, *args, **kwargs) -> None:
+        """Start the bot."""
+        try:
+            await super(Bot, self).start(*args, *kwargs)
+        except LoginFailure:
+            log.error(f"{self.name.upper()}_BOT_TOKEN is an invalid discord token.")
+            self.loop.stop()
 
     async def edit_nick(self, nick: str) -> None:
         """Edit the nickname of the bot in all servers."""
@@ -51,7 +39,9 @@ class Bots:
 
     def __init__(self, bots: Dict[str, Bot]) -> None:
         self.bots = bots
-        self.running = []
+        self.coin = coin
+
+        self.actions = []
 
     def load_extension(self, path: str) -> None:
         """Load bot cogs extensions."""
@@ -67,31 +57,31 @@ class Bots:
 
     def run(self, tokens: Dict[str, str]) -> None:
         """Run the bots forever."""
-        loop = asyncio.get_event_loop()
+        self.actions = [key for key in tokens.keys() if key]
 
-        # Reload the coin data forever with a delay
+        if not self.actions:
+            log.info("Bots are not running, please provide at least one token")
+            return
+
+        loop = asyncio.get_event_loop()
         loop.create_task(repeat(coin.reload, delay=Settings.reload_delay))
 
-        for name, token in tokens.items():
-            if token:
-                loop.create_task(self.bots[name].start(token))
-                self.running.append(name)
+        # Reload the coin data forever with a delay
+        for action in self.actions:
+            bot = self.bots[action]
+            bot.name = action
 
-        # Handle exceptions
-        if self.running:
-            log.info(f"Client starting for {Settings.id} with {', '.join(self.running)}")
-            log.info(f"Updating bots status every {Settings.reload_delay} seconds.")
-            loop.set_exception_handler(exception_handler)
-            loop.run_forever()
-        else:
-            log.info("Bots are not running, please provide valid tokens")
+            loop.create_task(bot.start(tokens[action]))
+
+        log.info(f"Client starting for {Settings.id} with {', '.join(self.actions)}")
+        log.info(f"Updating bots status every {Settings.reload_delay} seconds.")
+
+        loop.run_forever()
 
 
-client = Bots(
-    {
-        "price": Bot(),
-        "volume": Bot(),
-        "cap": Bot(),
-        "gas": Bot()
-    }
-)
+client = Bots({
+    "price": Bot(),
+    "volume": Bot(),
+    "cap": Bot(),
+    "gas": Bot()
+})

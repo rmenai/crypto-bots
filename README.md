@@ -48,7 +48,9 @@
 
 ## About The Project
 
-Discord crypto bots showing the price, volume and the ethereum gas price.
+Discord crypto bots showing:
+* The price, the volume and the market cap of a coin.
+* The ethereum gas price.
 
 <img src="https://i.imgur.com/qgF1VYQ.png" height="200">
 
@@ -89,16 +91,21 @@ Or manually:
 To run this project, you will need to add the following environment variables to your .env file or in docker-compose.yml
 
 
-| Tokens              | Description                         |
-|---------------------|-------------------------------------|
-| PRICE_BOT_TOKEN     | The price discord bot token         |
-| VOLUME_BOT_TOKEN    | The volume discord bot token        |
-| GAS_BOT_TOKEN       | The gas discord bot token           |
-| NOMICS_TOKEN        | Your token of the [nomics API](https://nomics.com/)        |
-| ETHGASSTATION_TOKEN | Your token of the [ethgasstation API](https://ethgasstation.info/) |
+| Discord bots        | Description                          |
+|---------------------|--------------------------------------|
+| PRICE_BOT_TOKEN     | The **price** discord bot token      |
+| VOLUME_BOT_TOKEN    | The **volume** discord bot token     |
+| CAP_BOT_TOKEN       | The **market cap** discord bot token |
+| GAS_BOT_TOKEN       | The **eth gas** discord bot token    |
 
-* `NOMICS_TOKEN` is required.
-* `ETHGASSTATION_TOKEN` is only required with `GAS_BOT_TOKEN`.
+* These are not all required, you just need at least one or more.
+
+
+| APIs           | Description                                                            |
+|----------------|------------------------------------------------------------------------|
+| NOMICS_API_KEY   | Your token of the [nomics API](https://nomics.com/)                  |
+
+* `NOMICS_API_KEY` is required.
 
 
 | Settings       | Description                      |

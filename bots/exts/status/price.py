@@ -3,7 +3,7 @@ import logging
 import discord
 from bots.bots import Bot
 from bots.config import Nicknames, Settings, Status
-from bots.utils.api import coin
+from bots.services.stats import coin
 from bots.utils.coin import get_arrow
 from discord.ext import commands, tasks
 
