@@ -50,7 +50,6 @@
 
 Discord crypto bots showing:
 * The price, the volume and the market cap of a coin.
-* The number of holders of a coin (only for ERC20 tokens).
 * The ethereum gas price.
 
 <img src="https://i.imgur.com/qgF1VYQ.png" height="200">
@@ -107,22 +106,18 @@ To run this project, you will need to add the following environment variables to
 |----------------|------------------------------------------------------------------------|
 | NOMICS_API_KEY   | Your token of the [nomics API](https://nomics.com/)                    |
 | ETH_GAS_API_KEY  | Your token of the [ethgasstation API](https://ethgasstation.info/)     |
-| COVALENT_API_KEY | Your token of the [covalent API](https://www.covalenthq.com/docs/api/) |
 
 * `NOMICS_API_KEY` is required.
 * `ETH_GAS_API_KEY` is only required for the eth gas bot.
-* `COVALENT_API_KEY` is only required for the holders bot.
 
 
 | Settings       | Description                      |
 |----------------|----------------------------------|
 | NOMICS_COIN_ID | The nomics id of the coin        |
-| COIN_ADDRESS    | The contract address of the coin  |
 | DELAY          | The delay between status refresh |
 | DEBUG          | The volume discord bot token     |
 
 * `NOMICS_COIN_ID` is required.
-* `COIN_ADDRESS` is required for the holders bot.
 * `DELAY` defaults to 5 seconds.
 
 ## Usage
